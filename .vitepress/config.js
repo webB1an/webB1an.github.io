@@ -152,7 +152,7 @@ export default {
     // },
 
     editLink: {
-      pattern: 'https://github.com/webB1an/webB1an.github.io/edit/main/docs/:path',
+      pattern: 'https://github.com/webB1an/webB1an.github.io/edit/master/src/:path',
       text: '编辑此页面'
     },
 
