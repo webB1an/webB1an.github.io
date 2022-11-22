@@ -309,6 +309,10 @@ template {
   background-color: var(--vt-c-bg) !important;
 }
 
+.hamburger .container{
+  height: 14px;
+}
+
 html.dark .VPNavBar {
   border-bottom: 1px solid var(--vt-c-divider-light);
   background-color: var(--vt-c-bg);

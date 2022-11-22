@@ -135,6 +135,7 @@ export default {
   description: 'Wu T1ao - Personal Blog',
   srcDir: 'src',
   scrollOffset: 'header',
+  lastUpdated: true,
   themeConfig: {
     logo: '/images/blog.gif',
     siteTitle: 'W',
