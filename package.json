@@ -1,0 +1,15 @@
+{
+  "name": "w-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress",
+    "build": "vitepress build",
+    "serve": "vitepress serve"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.0.0-alpha.29",
+    "vue": "^3.2.45"
+  }
+}
