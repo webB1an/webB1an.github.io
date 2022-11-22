@@ -136,6 +136,9 @@ export default {
   srcDir: 'src',
   scrollOffset: 'header',
   lastUpdated: true,
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ],
   themeConfig: {
     logo: '/images/blog.gif',
     siteTitle: 'W',
