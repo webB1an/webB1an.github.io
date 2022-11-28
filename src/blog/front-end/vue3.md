@@ -115,6 +115,37 @@ const slots = useSlots()
 </script>
 ```
 
+## defineOptions 1.0
+
+> 下面描述使用方式存在一些问题，`vue` 现在已经内置了 component name，组件内使用的话是和当前组件名称是一致的。
+
+`vue` 组件在自我调用的时候，不需要引入自己的组件，只需要在调用的时候通过自己的 `component name` 调用就行了，但是在 `vue3` 中用 `ts` + `setup` 模式的时候无法直接给组件添加 `name` 属性，使用步骤如下：
+
+1. `yarn add unplugin-vue-define-options`
+2. 在 `vite.config.ts` 中添加配置
+```js
+// 省去了部分代码
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+import DefineOptions from 'unplugin-vue-define-options/vite'
+
+export default defineConfig({
+  plugins: [vue(), DefineOptions()],
+})
+```
+
+3. 使用
+```js
+<script setup lang="ts">
+  defineOptions({
+    name: 'Layout'
+  })
+</script>
+<template>
+  <div>layout</div>
+</template>
+```
 ## 组件中使用 `v-model`
 
 `vue3` 当在组件上绑定 `v-model` 时：
@@ -199,69 +230,17 @@ defineEmits(['update:title'])
 </template>
 ```
 
-## defineOptions 1.0
+## `withDefaults` + `defineProps`
 
-> 下面描述使用方式存在一些问题，`vue` 现在已经内置了 component name，组件内使用的话是和当前组件名称是一致的。
-
-`vue` 组件在自我调用的时候，不需要引入自己的组件，只需要在调用的时候通过自己的 `component name` 调用就行了，但是在 `vue3` 中用 `ts` + `setup` 模式的时候无法直接给组件添加 `name` 属性，使用步骤如下：
-
-1. `yarn add unplugin-vue-define-options`
-2. 在 `vite.config.ts` 中添加配置
-```js
-// 省去了部分代码
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-
-import DefineOptions from 'unplugin-vue-define-options/vite'
-
-export default defineConfig({
-  plugins: [vue(), DefineOptions()],
-})
-```
-
-3. 使用
-```js
-<script setup lang="ts">
-  defineOptions({
-    name: 'Layout'
-  })
-</script>
-<template>
-  <div>layout</div>
-</template>
-```
-
-
-
-
-## 组件 v-model
-
-在 3.x 中，自定义组件上的 v-model 相当于传递了 modelValue prop 并接收抛出的 update:modelValue 事件：
+vue3 中父组件给子组件传值，子组件若要带有默认值的话，需要通过以下方式：
 
 ```html
-<ChildComponent v-model="pageTitle" />
-
-
-
-<ChildComponent
-  :modelValue="pageTitle"
-  @update:modelValue="pageTitle = $event"
-/>
-```
-
-
-因此在 vue3 中使用时通过以下方式
-
-父组件
-
-```html
+// 父组件
 <Tinymce id="tinymce" v-model="content" />
 ```
 
-子组件
-
 ```typescript
-
+// 子组件
 interface IProps {
   id: string,
   modelValue: string,
@@ -319,7 +298,7 @@ npm install -D unplugin-vue-components unplugin-auto-import
 
 然后把两款插件配置到 `webpack` 或者 `vite` 中
 
-### vite
+### vite 配置
 
 ```ts
 // vite.config.ts

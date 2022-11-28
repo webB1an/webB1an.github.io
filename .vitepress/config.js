@@ -125,6 +125,7 @@ const sidebar = {
         { text: 'docker + vue + express + mongodb 部署', link: '/blog/article/1' },
         { text: '从 centos docker 上备份 mongodb 数据到本地', link: '/blog/article/2' },
         { text: 'Express+Mongodb 动态注入 mongodb 密码实践记录', link: '/blog/article/3' },
+        { text: '使用 Pnpm + Vite + Typescript 搭建组件库', link: '/blog/article/4' },
       ]
     },
   ]
