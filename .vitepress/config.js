@@ -104,7 +104,7 @@ const sidebar = {
         { text: 'vue', link: '/blog/front-end/vue' },
         { text: 'vue3', link: '/blog/front-end/vue3' },
         { text: 'node', link: '/blog/front-end/node' },
-        { text: 'mongoose', link: '/blog/front-end/mongoose' },
+        { text: 'mongodb', link: '/blog/front-end/mongodb' },
         { text: 'docker', link: '/blog/front-end/docker' },
       ]
     },

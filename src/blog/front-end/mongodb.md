@@ -1,6 +1,8 @@
-# Mongoose
+# Mongodb
 
-## Schema.prototype.add()
+## Mongoose
+
+### Schema.prototype.add()
 
 `add` 方法可以给 `schema` 动态添加字段
 
@@ -18,7 +20,7 @@ const userSchema = new Schema({
 userSchema.add({age: 'String'})
 ```
 
-## Virtual
+### Virtual
 
 可以使用 `virtual` 为 `schema` 添加设置虚拟属性，但这个虚拟属性不会保存到数据库中。比如，前台传给后台一个参数 `name`， 代表用户名称，但数据库保存的是两个字段，姓和名，就可以使用虚拟属性
 
@@ -50,7 +52,7 @@ userSchema.virtual('fullname')
 // 将该 schema 保存到数据库中时，只会保存 name.first 和 name.last
 ```
 
-## Schema.prototype.path()
+### Schema.prototype.path()
 
 `Modal` 的实例是 `documents`，`document` 有很多自己本身的实例方法，也可以定义自己的实例方法
 
@@ -76,7 +78,7 @@ const user = new User({
 console.log(user.validatePassword()) // false
 ```
 
-## 定义 Static methods (静态方法)
+### 定义 Static methods (静态方法)
 
 ```js
 const userSchema = new Schema({
@@ -95,13 +97,13 @@ User.findByAge(18, (err, user) => {
 })
 ```
 
-## 自定义字段验证方法 Validation
+### 自定义字段验证方法 Validation
 
 1. `Validation` 是定义在 `SchemaType` 上的
 2. `Validation` 是中间件的一部分
 3. `Validation` 是在 `document` 执行 `save` 方法后触发
 
-```
+```js
 const userSchema = new Schema({
   age: String,
   username: String,
@@ -135,7 +137,7 @@ user.save(err => {
 })
 ```
 
-## Schema.prototype.pre()
+### Schema.prototype.pre()
 
 `pre` 方法给 `document` 提供了一个前置的钩子(pre hook)
 

@@ -1,5 +1,72 @@
 # NODE
 
+## express-validator 使用
+
+这里做个 express-validator 使用记录，具体详细使用方法可移步：[express-validator](https://express-validator.github.io/) 官网。
+
+### router
+
+```ts
+import express from 'express'
+import { checkSchema } from 'express-validator'
+import type { Router, Request, Response } from 'express'
+
+import { cookerFindCheckSchema } from '../validation/cooker'
+import checkSchemaError from '../middleware/checkSchemaError'
+
+router.post('/find', checkSchema(cookerFindCheckSchema), checkSchemaError, async(req: Request, res: Response) => {
+  // your code
+})
+```
+
+### cookerFindCheckSchema
+
+```ts
+export const cookerFindCheckSchema: Schema = {
+  pageSize: {
+    notEmpty: true,
+    isInt: true,
+    errorMessage: '缺少 pageSize 参数'
+  },
+  page: {
+    notEmpty: true,
+    isInt: true,
+    errorMessage: '缺少 page 参数'
+  },
+  requestData: {
+    custom: {
+      options: (value, { req, location, path }) => {
+        try {
+          if (typeof value === 'object') return value
+          return JSON.parse(value)
+        } catch (error) {
+          throw new Error('请输入正确的参数类型')
+        }
+      }
+    }
+  }
+}
+```
+
+### checkSchemaError
+
+```ts
+import type { Request, Response, NextFunction } from 'express'
+import { validationResult } from 'express-validator'
+
+export default function checkSchemaError(req: Request, res: Response, next: NextFunction) {
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    return res.json({
+      code: 90002,
+      msg: errors.array().map(err => err.msg).join(' | ')
+    })
+  }
+  next()
+}
+```
+
 ## 配置环境变量
 
 ::: tip 原因
