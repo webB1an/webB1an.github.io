@@ -1,1 +1,0 @@
-import{_ as e,c as t,o}from"./app.d2b9e7ff.js";const i=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"blog/front-end/docker.md","lastUpdated":1669086660000}'),r={name:"blog/front-end/docker.md"};function a(n,c,s,d,p,_){return o(),t("div")}const l=e(r,[["render",a]]);export{i as __pageData,l as default};
