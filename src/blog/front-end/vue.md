@@ -360,13 +360,34 @@ export default {
 }
 ```
 
+### el-table 表格实现跨页选择数据
 
+```vue
+<el-table
+  ref="multipleTable"
+  :data="tableData"
+  border
+  row-key="id"
+  @selection-change="handleSeleChange"
+>
+  <el-table-column
+    align="center"
+    :reserve-selection="true"
+    type="selection"
+    width="55"
+  >
+  </el-table-column>
+</el-table>
 
+<script>
+export default {
+  methods: {
+    handleSeleChange(val) {
+      this.selected = val
+    }
+  }
+}
+</script>
+```
 
-
-
-
-
-
-
-
+上面代码可以看到，要实现 el-table 表格实现跨页选择数据，需要指定 `el-table-column` 的 `type="selection"` 并且需要设置 `:reserve-selection="true"`，同时指定 `el-table` 的 `row-key="id"`，并绑定 `@selection-change="handleSeleChange"` 方法后就可以实现跨页选择数据了。

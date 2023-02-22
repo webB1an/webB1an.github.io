@@ -126,6 +126,8 @@ const sidebar = {
         { text: '从 centos docker 上备份 mongodb 数据到本地', link: '/blog/article/2' },
         { text: 'Express+Mongodb 动态注入 mongodb 密码实践记录', link: '/blog/article/3' },
         { text: '使用 Pnpm + Vite + Typescript 搭建组件库', link: '/blog/article/4' },
+        { text: 'Vue 2.0.0-alpha.1 源码阅读', link: '/blog/article/5' },
+        { text: 'Vue 2.x 实例化传参 render 和 templete 的区别', link: '/blog/article/6' },
       ]
     },
   ]

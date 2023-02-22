@@ -1,5 +1,73 @@
 # JAVASCRIPT
 
+## JS 上传下载
+
+### 上传导入文件
+
+用 `axios` 封装导入上传时，需要传递额外的请求头：
+
+```js
+export function importFile(data) {
+  return request({
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    url: 'you-import-file-url',
+    method: 'post',
+    data: data
+  })
+}
+```
+
+然后再调用导入文件的时候：
+
+```js
+let formData = new FormData()
+let file = this.file
+formData.append('file',file)
+importFile(file)
+```
+
+### 下载文件
+
+当后台返回的是文件流时封装的 `axios` 请求需要添加 `responseType`：
+
+```js
+export function exportFile(data) {
+  return request({
+    url: 'your-export-file-url',
+    method: 'post',
+    data: data,
+    responseType: 'blob'
+  })
+}
+```
+
+然后请求接口如下：
+
+```js
+exportFile(data).then(res => {
+  Export(res, '下载文件名称')
+})
+```
+
+`Export` 内容如下：
+
+```js
+export function Export(res, filename, type = 'xlsx') {
+  const blob = new Blob([res])
+  const fileName = `${filename}.${type}`
+  const elink = document.createElement('a')
+  elink.download = fileName
+  elink.style.display = 'none'
+  elink.href = URL.createObjectURL(blob)
+  document.body.appendChild(elink)
+  elink.click()
+  URL.revokeObjectURL(elink.href) // 释放URL 对象
+  document.body.removeChild(elink)
+}
+```
+
 ## js 构造函数 原型 实例 原型链 继承
 
 ### Constructor 构造函数

@@ -1,5 +1,48 @@
 # NODE
 
+## `__dirname` 和 `process.cwd()` 差异
+
+:::info 初衷
+node 中很多概念经常会忘记，这里做一个记录~
+:::
+
+测试目录如下：
+
+```
+📦node
+ ┗ 📂test
+ ┃ ┗ 📜index.js
+```
+
+`index.js` 内容如下：
+
+```js
+console.log(`cwd: ${process.cwd()}`)
+console.log(`dirname: ${__dirname}`)
+```
+
+命令行定位到 node 目录，执行 `node test/index.js`，得到的结果为：
+
+```
+cwd: /Users/wut1ao/learn/node
+dirname: /Users/wut1ao/learn/node/test
+```
+
+命令行定位到 test 目录，执行 `node index.js`，得到的结果为：
+
+```
+cwd: /Users/wut1ao/learn/node/test
+dirname: /Users/wut1ao/learn/node/test
+```
+
+由此可以看出：
+
+- `__dirname`：表示要执行源代码的目录
+- `process.cwd()`：表示返回当前工作目录，如：调用 node 命令执行脚本时的目录
+
+所有在上面的例子中，我们定位到不同的目录执行 `index.js` 时，`__dirname` 的输出都是不变的，而因为我们调用 node 命令执行脚本的目录变了，所有 `process.cwd()` 运行的结果发生了改变。
+
+
 ## express-validator 使用
 
 这里做个 express-validator 使用记录，具体详细使用方法可移步：[express-validator](https://express-validator.github.io/) 官网。
