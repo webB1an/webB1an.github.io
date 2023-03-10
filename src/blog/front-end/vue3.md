@@ -1,5 +1,59 @@
 # VUE3
 
+## tailwindcss 的使用
+
+### 在 vite 安装 tailwindcss
+
+先按照官网教程按照引入[vite 按照教程](https://tailwindcss.com/docs/guides/vite)
+
+安装 
+
+```sh
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+配置 `tailwind.config.js`
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+添加 Tailwind 指令到 css
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### vscode 安装相关插件
+
+- [PostCSS Language Support](https://marketplace.visualstudio.com/items?itemName=csstools.postcss)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+### 添加使用 Tailwind 时 vscode 配置
+
+在项目的根目录 .vscode/setting.json 添加
+
+```json
+{
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
+```
+
 ## Props
 
 ```typescript
@@ -298,6 +352,9 @@ npm install -D unplugin-vue-components unplugin-auto-import
 
 然后把两款插件配置到 `webpack` 或者 `vite` 中
 
+- 下面的配置后，在 src/componennts 文件下的组件和 element-plus 中的组件内不需要在全局导入和手动引入，直接使用就可以了。
+- vue 中的 ref 等 api、vue-router 中的 useRoute 等 api、pinia 中的 storeToRefs 等 api 不需要手动导入，直接使用就可以了。
+
 ### vite 配置
 
 ```ts
@@ -310,16 +367,52 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   // ...
   plugins: [
-    // ...
     AutoImport({
+      imports: ['vue', 'vue-router', 'pinia'],
       resolvers: [ElementPlusResolver()],
+      dts: 'types/auto-imports.d.ts',
+      eslintrc: {
+        enabled: false,
+        filepath: './.eslint-auto-imports.json',
+        globalsPropValue: true
+      }
     }),
     Components({
       resolvers: [ElementPlusResolver()],
-    }),
+      dts: 'types/components.d.ts'
+    })
   ],
 })
 ```
+
+在上面的配置中如果不配置 auto-import 中的话会在使用相关 ref 等 api 时会提示错误，这时候需要在 AutoImport 添加相关 eslintrc 内容
+
+```js{5-9}
+AutoImport({
+  imports: ['vue', 'vue-router', 'pinia'],
+  resolvers: [ElementPlusResolver()],
+  dts: 'types/auto-imports.d.ts',
+  eslintrc: {
+    enabled: false,
+    filepath: './.eslint-auto-imports.json',
+    globalsPropValue: true
+  }
+})
+```
+
+然后把在生成 `eslint-auto-imports.json` 文件加入到 `.eslintrc.cjs` 的 extends 中
+
+```js
+module.exports = {
+  // some code...
+  extends: [
+    // some code ...
+    './.eslint-auto-imports.json'
+  ]
+}
+```
+
+
 
 更多可参考 [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components#installation) 和 [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import#install)。
 

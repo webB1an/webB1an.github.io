@@ -1,5 +1,50 @@
 # JAVASCRIPT
 
+## 接口返回文件流处理
+
+当导入文件上传给后台时，遇到一种需求，导入成功时接口返回成功，失败时返回失败的文件流，注意这里的成功和失败都是同一个接口。
+
+导入接口
+
+```js
+export function upload(data) {
+  return request({
+    url: `your-url`,
+    method: 'post',
+    data,
+    responseType: 'blob'
+  })
+}
+```
+
+这里我们把 `responseType` 设置成了 blob 类型，在接收数据的时候解析就可以了。
+
+解析数据
+
+```js
+customLoad(file) {
+  const form = new FormData()
+  form.append('file', file)
+  upload(form).then(res => {
+    const resData = res.data
+    const fileReader = new FileReader()
+    fileReader.onloadend = () => {
+      try {
+        const _data = JSON.parse(fileReader.result)
+        if (_data.code !== '90001') return this.$message.error(_data.msg)
+        this.$message.success('导入成功！')
+      } catch (err) {
+        // 下载文件
+        Export(res, '导入失败.xlsx')
+      }
+    }
+    fileReader.readAsText(resData)
+    this.importDialog.customLoading = false
+    this.importDialogVisible.visible = false
+  })
+}
+```
+
 ## JS 上传下载
 
 ### 上传导入文件
