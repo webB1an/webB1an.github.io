@@ -1,5 +1,116 @@
 # VUE3
 
+## vue3 支持 markdown
+
+代码示例
+
+```ts
+import { defineConfig } from 'vite'
+import Vue from '@vitejs/plugin-vue'
+import Markdown from 'vite-plugin-vue-markdown'
+import LinkAttributes from 'markdown-it-link-attributes'
+import Shiki from 'markdown-it-shiki'
+import VueMacros from 'unplugin-vue-macros/vite'
+
+export default defineConfig([
+  plugins: [
+    // https://github.com/antfu/vite-plugin-vue-markdown
+    Markdown({
+      wrapperClasses: 'prose prose-sm m-auto text-left markdown-body',
+      headEnabled: false,
+      markdownItSetup(md) {
+        // https://prismjs.com/
+        md.use(Shiki, {
+          theme: {
+            light: 'vitesse-light',
+            dark: 'vitesse-dark',
+          },
+        })
+        md.use(LinkAttributes, {
+          matcher: (link: string) => /^https?:\/\//.test(link),
+          attrs: {
+            target: '_blank',
+            rel: 'noopener',
+          },
+        })
+      },
+    })
+  ]
+])
+```
+
+配置后需要把 md 文件当成 vue 组件处理
+
+````ts
+// src/shims.d.ts
+declare interface Window {
+  // extend the window
+}
+
+// with vite-plugin-vue-markdown, markdown files can be treated as Vue components
+declare module '*.md' {
+  import { type DefineComponent } from 'vue'
+  const component: DefineComponent<{}, {}, any>
+  export default component
+}
+```
+
+以上代码配置完成后，就可以在 `src` 目录下创建 `*.md` 文件，然后在 router 中配置路后就可以通过路由访问了。
+
+## vue3 第三方库推荐
+
+- [unplugin-vue-macros](https://github.com/sxzz/unplugin-vue-macros) - 一个 Vue3 的宏插件，可以让你在 Vue3 中使用 Vue2 的写法，比如 `defineOptions`、`defineProps`、`defineEmits` 等等。
+- [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import) - 一个自动导 api 的插件，可以让你在使用 api 的时候不用手动导入，比如 `import { ref } from 'vue'`，只需要在使用的时候 `ref` 就可以了。
+- [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) - 一个自动导入组件的插件，可以让你在使用组件的时候不用手动导入，比如 `import { Button } from 'ant-design-vue'`，只需要在使用的时候 `Button` 就可以了。
+
+### uplugin-vue-macros、unplugin-auto-import、unplugin-vue-components 配置 demo
+
+```js
+// vite.config.ts
+
+import { defineConfig } from 'vite'
+import Vue from '@vitejs/plugin-vue'
+import VueMacros from 'unplugin-vue-macros/vite'
+
+export default defineConfig({
+  plugins: [
+    VueMacros({
+      plugins: {
+        vue: Vue({
+          include: [/\.vue$/, /\.md$/],
+          reactivityTransform: true,
+        }),
+      },
+    }),
+    // https://github.com/antfu/unplugin-auto-import
+    AutoImport({
+      imports: [
+        'vue',
+        'vue-router',
+        'vue/macros',
+        // '@vueuse/head',
+        // '@vueuse/core',
+      ],
+      dts: 'types/auto-imports.d.ts',
+      dirs: [
+        // 'src/composables',
+        // 'src/stores',
+      ],
+      vueTemplate: true,
+    }),
+
+    // https://github.com/antfu/unplugin-vue-components
+    Components({
+      // allow auto load markdown components under `./src/components/`
+      extensions: ['vue', 'md'],
+      // allow auto import and register components used in markdown
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      dts: 'types/components.d.ts',
+    }),
+  ]
+})
+```
+
 ## tailwindcss 的使用
 
 ### 在 vite 安装 tailwindcss
