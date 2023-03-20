@@ -41,7 +41,7 @@ export default defineConfig([
 
 配置后需要把 md 文件当成 vue 组件处理
 
-````ts
+```ts
 // src/shims.d.ts
 declare interface Window {
   // extend the window
@@ -63,7 +63,7 @@ declare module '*.md' {
 - [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import) - 一个自动导 api 的插件，可以让你在使用 api 的时候不用手动导入，比如 `import { ref } from 'vue'`，只需要在使用的时候 `ref` 就可以了。
 - [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) - 一个自动导入组件的插件，可以让你在使用组件的时候不用手动导入，比如 `import { Button } from 'ant-design-vue'`，只需要在使用的时候 `Button` 就可以了。
 
-### uplugin-vue-macros、unplugin-auto-import、unplugin-vue-components 配置 demo
+### uplugin-vue-macros unplugin-auto-import unplugin-vue-components 配置 demo
 
 ```js
 // vite.config.ts
