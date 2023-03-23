@@ -1,5 +1,30 @@
 # JAVASCRIPT
 
+## 任意元素滚动到页面顶部
+
+可以通过 `el.scrollIntoView({ behavior: 'smooth' })` 方法直接把元素滚动到可视区域，但这个方法有一个问题就是，当页面顶部的导航条是 `fixed` 定位时，使用 `scrollIntoView` 方法滚动到页面顶部时，会被导航条遮挡，所以我们需要自己实现一个滚动到页面顶部的方法。
+
+首先我们要获取元素距离文档顶部的距离 `offsetTop`，然后通过 `window.scrollTo` 方法来滚动页面。
+
+- `offsetTop`：元素距离文档顶部的距离而不是距离窗口顶部的距离，这一点很重要！
+- `window.scrollTo`：滚动到指定位置，当传参为对象时，可以设置滚动的行为，`behavior` 为 `smooth` 时，滚动的行为为平滑滚动。
+  - 传参数为对象时，`top` 页面要向上滚动的距离，`behavior` 为滚动的行为，`behavior` 为 `smooth` 时，滚动的行为为平滑滚动。
+
+```js
+const scrollTo = (id: string) => {
+  const el = document.getElementById(id)
+  if (el) {
+    const height = el.offsetTop
+    const navHeight = document.querySelector('.nav')?.clientHeight || 0
+    document.documentElement.scrollTo({
+      top: height - navHeight,
+      behavior: 'smooth',
+    })
+    // 
+  }
+}
+```
+
 ## 接口返回文件流处理
 
 当导入文件上传给后台时，遇到一种需求，导入成功时接口返回成功，失败时返回失败的文件流，注意这里的成功和失败都是同一个接口。
