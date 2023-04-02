@@ -122,6 +122,7 @@ const sidebar = {
     {
       text: '文章',
       items: [
+        { text: 'vue3 自定义全局 loading 功能', link: '/blog/article/7' },
         { text: 'docker + vue + express + mongodb 部署', link: '/blog/article/1' },
         { text: '从 centos docker 上备份 mongodb 数据到本地', link: '/blog/article/2' },
         { text: 'Express+Mongodb 动态注入 mongodb 密码实践记录', link: '/blog/article/3' },
