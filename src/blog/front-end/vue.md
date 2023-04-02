@@ -10,6 +10,25 @@
 }
 </style>
 
+## Vue 在缓存组件中 watch 路由来回切换产生额外请求
+
+在 vue 的缓存组件中使用 `watch` 监听路由变化，当路由变化时，会调用当前所有缓存组件中的 `watch`，会导致其他页面监听路由的数据也与后台发生请求，产生叠加请求。
+
+解决方法直接使用 `keep-alive` 的 `activated` 生命周期，当组件被激活时，做下判断再去请求数据。
+
+```js
+activated() {
+  const { param = '' } = this.$route.query
+  if (!param) return
+  if (this.planCode !== param) {
+    this.planCode = param
+    this.getTableList()
+  }
+}
+```
+
+
+
 ## `vm.$mount([elementOrSelector])`
 
 - 用法： `vm.$mount( [elementOrSelector] )`
