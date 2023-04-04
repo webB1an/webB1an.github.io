@@ -1,5 +1,9 @@
 # VUE3
 
+## vue3 自定义全局 directive 功能
+
+[查看文章](/blog/article/2023/3.html)
+
 ## vue3 自定义全局 loading 功能
 
 [查看文章](/blog/article/2023/2.html)
