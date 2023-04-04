@@ -2,7 +2,7 @@
 
 ## vue3 自定义全局 loading 功能
 
-[查看文章](/blog/article/7.html)
+[查看文章](/blog/article/2023/2.html)
 
 ## vue3 支持 markdown
 
