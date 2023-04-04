@@ -1,5 +1,9 @@
 # VUE3
 
+## vue3 自定义全局 loading 功能
+
+[查看文章](/blog/article/7.html)
+
 ## vue3 支持 markdown
 
 代码示例
