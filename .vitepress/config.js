@@ -1,8 +1,27 @@
 const nav = [
   {
+    text: 'About',
+    activeMatch: `^/about/`,
+    link: '/about/introduction'
+  },
+  {
+    text: 'AI 指南',
+    link: 'https://ai-compass.github.io/'
+  },
+  {
+    text: 'Github',
+    link: 'https://github.com/webB1an'
+  },
+  {
     text: 'Blog',
     activeMatch: `^/(blog)/`,
     items: [
+      {
+        text: '工具',
+        items: [
+          { text: '三角形生成器', link: '/blog/tools/triangle' },
+        ]
+      },
       {
         text: '前端',
         items: [
@@ -22,23 +41,6 @@ const nav = [
     ]
   },
   {
-    text: 'About',
-    activeMatch: `^/about/`,
-    link: '/about/introduction'
-  },
-  {
-    text: 'Tools',
-    activeMatch: `^/tools/`,
-    items: [
-      { text: '工作', link: '/tools/work' },
-      { text: '娱乐', link: '/tools/funny  ' },
-    ]
-  },
-  {
-    text: 'Github',
-    link: 'https://github.com/webB1an'
-  },
-  {
     text: 'Respositories',
     items: [
       {
@@ -50,6 +52,7 @@ const nav = [
       {
         text: 'Vite',
         items: [
+          { text: 'simple-vite-templete-v2', link: 'https://github.com/webB1an/simple-vite-templete-v2' },
           { text: 'simple-vite-templete', link: 'https://github.com/webB1an/simple-vite-templete' },
           { text: 'vite-element-admin', link: 'https://github.com/webB1an/vite-element-admin' },
         ]
@@ -62,12 +65,7 @@ const nav = [
         ]
       },
     ]
-  },
-  // {
-  //   text: 'API',
-  //   activeMatch: `^/api/`,
-  //   link: '/api/'
-  // },
+  }
 ]
 
 const sidebar = {
@@ -96,6 +94,12 @@ const sidebar = {
     },
   ],
   '/blog/': [
+    {
+      text: '工具相关',
+      items: [
+        { text: '三角形生成器', link: '/blog/tools/triangle' },
+      ]
+    },
     {
       text: '前端相关',
       items: [
@@ -140,7 +144,7 @@ export default {
   ],
   themeConfig: {
     logo: '/images/blog.gif',
-    siteTitle: 'W',
+    siteTitle: 'WuT1ao',
     nav,
     sidebar,
     socialLinks: [

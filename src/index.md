@@ -14,13 +14,13 @@ title: Wu T1ao - Personal Blog
     <br/> Personal Blog
   </h1>
   <p class="logo">
-    <img src="/images/blog.gif" alt="" srcset="">
+    <img src="/images/blog.gif">
   </p>
   <p class="description">
     吾将抵斯之梦境 不尽欢畅
   </p>
   <p class="actions">
-    <a class="get-started" href="/about/introduction">
+    <a class="get-started" href="/blog/tools/triangle">
       Go On
       <svg
         class="icon"

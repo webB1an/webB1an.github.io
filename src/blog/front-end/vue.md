@@ -10,6 +10,87 @@
 }
 </style>
 
+## $router.resolve
+
+`this.$router.resolve`是Vue Router提供的一个方法，它返回一个路由解析结果对象。这个方法可以用来获取与当前路由相对应的URL路径或者跳转到另一个路由。
+
+下面是`this.$router.resolve`方法的使用方式和含义：
+
+```javascript
+// 获取当前路由对应的URL路径
+const currentRouteUrl = this.$router.resolve().href; 
+
+// 跳转到另一个路由并获取相应的URL路径
+const targetRouteUrl = this.$router.resolve({ name: 'target-route-name' }).href; 
+```
+
+在第一个示例中，`this.$router.resolve().href`将返回当前路由的完整URL路径。而在第二个示例中，通过传入一个具有路由名称属性的对象，`this.$router.resolve({ name: 'target-route-name' })`会返回一个包含目标路由信息的路由解析结果对象，然后`.href`属性将返回该路由的完整URL路径。
+
+需要注意的是，`this.$router.resolve`方法不会实际导航到目标路由，而只是返回路由解析结果对象。如果需要进行页面导航，则需要使用`this.$router.push`或`this.$router.replace`方法。
+
+### 实际使用
+
+```js
+// 跳转店铺首页
+shopPage(id) {
+  let routeUrl = this.$router.resolve({
+    path: '/Merchant',
+    query: {id: id}
+  });
+  window.open(routeUrl.href, '_blank');
+}
+```
+
+## Vue 中使用防抖函数 debounce
+
+防抖函数是一种常用的 JavaScript 函数优化技术，它可以限制一些频繁执行的操作，从而提高性能。其实现原理为在函数被触发 n 秒后再执行，如果在这 n 秒内又被触发，则重新计时。
+
+以下是一个简单的防抖函数实现：
+
+```js
+function debounce(func, delay) {
+  let timer;
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, arguments);
+    }, delay);
+  }
+}
+```
+
+该函数接受两个参数：要执行的函数 func 和防抖时间 delay，返回一个新的函数。在新函数中使用 clearTimeout() 方法清除之前设置的定时器，并使用 setTimeout() 方法设置新的定时器。
+
+在 Vue 中使用防抖函数可以通过将其作为一个方法来实现。下面是一个在 Vue 组件中使用防抖函数的示例：
+
+```vue
+<template>
+  <div>
+    <input type="text" v-model="searchText" @input="debouncedSearch">
+  </div>
+</template>
+
+<script>
+import { debounce } from '@/utils';
+
+export default {
+  data() {
+    return {
+      searchText: '',
+    };
+  },
+  methods: {
+    search() {
+      console.log('Searching...');
+    },
+    debouncedSearch: debounce(function() {
+      this.search();
+    }, 500),
+  },
+};
+</script>
+```
+
 ## Vue 在缓存组件中 watch 路由来回切换产生额外请求
 
 在 vue 的缓存组件中使用 `watch` 监听路由变化，当路由变化时，会调用当前所有缓存组件中的 `watch`，会导致其他页面监听路由的数据也与后台发生请求，产生叠加请求。
