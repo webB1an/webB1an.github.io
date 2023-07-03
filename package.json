@@ -9,7 +9,12 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "sass": "^1.63.6",
     "vitepress": "^1.0.0-alpha.29",
     "vue": "^3.2.45"
+  },
+  "dependencies": {
+    "element-plus": "^2.3.7",
+    "prismjs": "^1.29.0"
   }
 }

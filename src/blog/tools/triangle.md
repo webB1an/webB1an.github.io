@@ -6,5 +6,3 @@ import Triangle from './components/Triangle.vue'
 
 <Triangle />
 
-
-未完成待续...
