@@ -582,10 +582,7 @@ export default {
   border-width: ${this.lengths};
   border-color: ${this.colors};
 }`;
-      console.log(outputCssStr);
       let cssCode = Prism.highlight(outputCssStr, Prism.languages.css);
-      console.log('Prism.languages.css', Prism.languages.css);
-      console.log('cssCode', cssCode);
       this.$refs["code-container"].innerHTML = cssCode;
     },
 

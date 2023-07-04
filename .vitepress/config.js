@@ -20,6 +20,7 @@ const nav = [
         text: '工具',
         items: [
           { text: '三角形生成器', link: '/blog/tools/triangle' },
+          { text: '阴影生成器', link: '/blog/tools/box-shadow' },
         ]
       },
       {
@@ -98,6 +99,7 @@ const sidebar = {
       text: '工具相关',
       items: [
         { text: '三角形生成器', link: '/blog/tools/triangle' },
+        { text: '阴影生成器', link: '/blog/tools/box-shadow' },
       ]
     },
     {
