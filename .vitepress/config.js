@@ -21,6 +21,7 @@ const nav = [
         items: [
           { text: '三角形生成器', link: '/blog/tools/triangle' },
           { text: '阴影生成器', link: '/blog/tools/box-shadow' },
+          { text: 'flex 布局', link: '/blog/tools/flex' },
         ]
       },
       {
@@ -100,6 +101,7 @@ const sidebar = {
       items: [
         { text: '三角形生成器', link: '/blog/tools/triangle' },
         { text: '阴影生成器', link: '/blog/tools/box-shadow' },
+        { text: 'flex 布局', link: '/blog/tools/flex' },
       ]
     },
     {

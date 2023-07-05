@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/prismjs": "^1.26.0",
     "sass": "^1.63.6",
     "vitepress": "^1.0.0-alpha.29",
     "vue": "^3.2.45"
