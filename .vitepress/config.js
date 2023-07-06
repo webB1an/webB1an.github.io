@@ -22,6 +22,7 @@ const nav = [
           { text: '三角形生成器', link: '/blog/tools/triangle' },
           { text: '阴影生成器', link: '/blog/tools/box-shadow' },
           { text: 'flex 布局', link: '/blog/tools/flex' },
+          { text: '图片适配', link: '/blog/tools/object-fit-position' },
         ]
       },
       {
@@ -102,12 +103,14 @@ const sidebar = {
         { text: '三角形生成器', link: '/blog/tools/triangle' },
         { text: '阴影生成器', link: '/blog/tools/box-shadow' },
         { text: 'flex 布局', link: '/blog/tools/flex' },
+        { text: '图片适配', link: '/blog/tools/object-fit-position' },
       ]
     },
     {
       text: '前端相关',
       items: [
         { text: 'javascript', link: '/blog/front-end/javascript' },
+        { text: 'css', link: '/blog/front-end/css' },
         { text: 'es6', link: '/blog/front-end/es6' },
         { text: 'vue', link: '/blog/front-end/vue' },
         { text: 'vue3', link: '/blog/front-end/vue3' },

@@ -7,7 +7,7 @@
     width: 300px;
     height: 300px;
     margin: 0 auto;
-    background-image: url(/images/transparent.png);
+    background-image: url(/images/tools/transparent.png);
   }
   h4 {
     margin-top: 15px;

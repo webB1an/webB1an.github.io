@@ -57,7 +57,6 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import Prism from "prismjs";
 import 'prismjs/themes/prism-okaidia.css'
-import 'prismjs/plugins/toolbar/prism-toolbar.css'
 
 type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
 type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse'
