@@ -23,6 +23,7 @@ const nav = [
           { text: '阴影生成器', link: '/blog/tools/box-shadow' },
           { text: 'flex 布局', link: '/blog/tools/flex' },
           { text: '图片适配', link: '/blog/tools/object-fit-position' },
+          { text: '实用网站', link: '/blog/tools/useful-website' },
         ]
       },
       {
@@ -104,6 +105,7 @@ const sidebar = {
         { text: '阴影生成器', link: '/blog/tools/box-shadow' },
         { text: 'flex 布局', link: '/blog/tools/flex' },
         { text: '图片适配', link: '/blog/tools/object-fit-position' },
+        { text: '实用网站', link: '/blog/tools/useful-website' },
       ]
     },
     {

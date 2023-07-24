@@ -1,0 +1,15 @@
+# 实用网站
+
+## 学习
+- [程序员副业指南](http://r.ftqq.com/lean-side-bussiness/index.html)：一个程序员副业指南，包含了程序员副业的各种思路和方法。
+- [考公](https://www.zhihu.com/people/lao-fu-zi-40-46)：一个关于公务员考试的知乎专栏，包含了公务员考试的各种信息。
+
+## 工具
+- [qrcode](https://qrcode.antfu.me/)：antfu 大佬开发的一个在线二维码生成器。
+- [JSON 在线解析](https://www.sojson.com/)：JSON 在线解析及格式化验证工具。
+
+## 资源
+- [AGE 动漫网址发布页](https://github.com/agefanscom/website)：一个可以看动漫的网站，包含了各种动漫。
+
+## API
+- [一言](https://developer.hitokoto.cn/)：一言（Hitokoto，又称：句子迷）是一个可以随机获取动漫、小说、游戏中的台词或句子的网站，可以用于网站中的每日一句，签名档等等。
