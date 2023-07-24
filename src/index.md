@@ -5,6 +5,22 @@ title: Wu T1ao - Personal Blog
 ---
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
+const sentence = ref('')
+
+getSentence()
+
+async function getSentence() {
+  try {
+    const response = await fetch('https://v1.hitokoto.cn')
+    const { hitokoto: hitokotoText } = await response.json()
+    sentence.value = hitokotoText
+  } catch (error) {
+    sentence.value = '吾将抵斯之梦境不尽欢畅'
+  }
+  
+}
 </script>
 
 <section id="hero">
@@ -17,7 +33,15 @@ title: Wu T1ao - Personal Blog
     <img src="/images/blog.gif">
   </p>
   <p class="description">
-    吾将抵斯之梦境 不尽欢畅
+    <div class="loading" v-if="!sentence">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+    <span v-else>
+      {{ sentence }}
+    </span>
   </p>
   <p class="actions">
     <a class="get-started" href="/blog/tools/triangle">
@@ -346,3 +370,131 @@ html:not(.dark) .accent,
 }
 </style>
 
+<style scoped>
+.loading {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+}
+
+.shape {
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  border-radius: 2px;
+}
+
+.shape-1 {
+  background-color: #1875e5;
+  left: 0;
+  animation: animationShape1 2s linear infinite;
+}
+
+.shape-2 {
+  background-color: #c5523f;
+  right: 0;
+  animation: animationShape2 2s linear infinite;
+}
+
+.shape-3 {
+  background-color: #499255;
+  bottom: 0;
+  animation: animationShape3 2s linear infinite;
+}
+
+.shape-4 {
+  background-color: #f2b736;
+  right: 0;
+  bottom: 0;
+  animation: animationShape4 2s linear infinite;
+}
+
+@keyframes animationShape1 {
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translateX(17px);
+  }
+
+  50% {
+    transform: translate(17px, 17px);
+  }
+
+  75% {
+    transform: translate(0, 17px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes animationShape2 {
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translateY(17px);
+  }
+
+  50% {
+    transform: translate(-17px, 17px);
+  }
+
+  75% {
+    transform: translate(-17px, 0);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes animationShape3 {
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translateY(-17px);
+  }
+
+  50% {
+    transform: translate(17px, -17px);
+  }
+
+  75% {
+    transform: translate(17px, 0);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes animationShape4 {
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translateX(-17px);
+  }
+
+  50% {
+    transform: translate(-17px, -17px);
+  }
+
+  75% {
+    transform: translate(0, -17px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+</style>
