@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as a,d as r}from"./app.57f6c006.js";const u=JSON.parse('{"title":"\u5A31\u4E50","description":"","frontmatter":{},"headers":[],"relativePath":"tools/funny.md","lastUpdated":1677031107000}'),n={name:"tools/funny.md"},o=r("",2),_=[o];function s(l,i,d,c,h,f){return t(),a("div",null,_)}const m=e(n,[["render",s]]);export{u as __pageData,m as default};
