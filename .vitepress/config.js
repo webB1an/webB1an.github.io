@@ -137,6 +137,7 @@ const sidebar = {
     {
       text: '文章',
       items: [
+        { text: '历史文章汇总', link: '/blog/article/collect' },
         { text: '2023 年文章汇总', link: '/blog/article/2023' },
         { text: '2022 年文章汇总', link: '/blog/article/2022' },
       ]
