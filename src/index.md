@@ -44,7 +44,7 @@ async function getSentence() {
     </span>
   </p>
   <p class="actions">
-    <a class="get-started" href="/blog/tools/triangle">
+    <a class="get-started" href="/blog/tools/useful-website">
       Go On
       <svg
         class="icon"

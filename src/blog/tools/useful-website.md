@@ -6,6 +6,7 @@
 
 ## 工具
 - [qrcode](https://qrcode.antfu.me/)：antfu 大佬开发的一个在线二维码生成器。
+- [草料二维码解码器](https://cli.im/deqr/other)：一个在线二维码解码器。
 - [JSON 在线解析](https://www.sojson.com/)：JSON 在线解析及格式化验证工具。
 
 ## 资源
