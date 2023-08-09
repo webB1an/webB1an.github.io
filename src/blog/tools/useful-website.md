@@ -8,6 +8,7 @@
 - [qrcode](https://qrcode.antfu.me/)：antfu 大佬开发的一个在线二维码生成器。
 - [草料二维码解码器](https://cli.im/deqr/other)：一个在线二维码解码器。
 - [JSON 在线解析](https://www.sojson.com/)：JSON 在线解析及格式化验证工具。
+- [Danbooru 标签超市](https://tags.novelai.dev/)：AI 绘画标签组合的网站。
 
 ## 资源
 - [AGE 动漫网址发布页](https://github.com/agefanscom/website)：一个可以看动漫的网站，包含了各种动漫。

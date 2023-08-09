@@ -1,5 +1,42 @@
 # JAVASCRIPT
 
+## flatMap 方法用法与示例
+
+在 JavaScript 中，`flatMap` 是一个数组方法，用于对数组中的每个元素执行一个函数，并将结果组合成一个新的扁平化数组。它首先使用提供的函数映射每个元素，然后将映射后的结果按照顺序连接成一个新的数组。
+
+`flatMap` 方法的语法如下：
+```javascript
+array.flatMap(callback(currentValue[, index[, array]])[, thisArg])
+```
+
+- `callback`：一个函数，用来对数组的每个元素执行操作，接受三个参数：
+  - `currentValue`：当前正在处理的数组元素。
+  - `index`（可选）：当前元素的索引。
+  - `array`（可选）：调用 `flatMap` 方法的数组。
+
+- `thisArg`（可选）：在执行回调函数时使用的上下文对象。
+
+下面是一个使用 `flatMap` 方法的示例：
+
+```javascript
+// 假设有一个数组包含多个人的技能列表
+const people = [
+  { name: 'Alice', skills: ['JavaScript', 'HTML'] },
+  { name: 'Bob', skills: ['Python', 'CSS'] },
+  { name: 'Charlie', skills: ['Java', 'React'] }
+];
+
+// 使用 flatMap 提取所有技能并扁平化成一个数组
+const allSkills = people.flatMap(person => person.skills);
+
+console.log(allSkills);
+// 输出: ['JavaScript', 'HTML', 'Python', 'CSS', 'Java', 'React']
+```
+
+在上面的示例中，`flatMap` 方法将每个人的技能列表提取出来，然后将所有技能连接成一个新的扁平化数组 `allSkills`。
+
+需要注意的是，`flatMap` 会自动忽略映射后的结果中的空项（`undefined`、`null`等），并且它只会扁平化一层，即如果映射的结果本身是数组，它不会再递归地继续扁平化。
+
 ## 任意元素滚动到页面顶部
 
 可以通过 `el.scrollIntoView({ behavior: 'smooth' })` 方法直接把元素滚动到可视区域，但这个方法有一个问题就是，当页面顶部的导航条是 `fixed` 定位时，使用 `scrollIntoView` 方法滚动到页面顶部时，会被导航条遮挡，所以我们需要自己实现一个滚动到页面顶部的方法。
