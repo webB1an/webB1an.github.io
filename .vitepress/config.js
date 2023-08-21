@@ -107,6 +107,7 @@ const sidebar = {
         { text: '阴影生成器', link: '/blog/tools/box-shadow' },
         { text: 'flex 布局', link: '/blog/tools/flex' },
         { text: '图片适配', link: '/blog/tools/object-fit-position' },
+        { text: '文件上传', link: '/blog/tools/el-upload' },
         { text: '文本超出显示省略号', link: '/blog/tools/text-overflow' },
       ]
     },
