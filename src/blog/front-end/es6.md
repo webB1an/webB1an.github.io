@@ -1,5 +1,30 @@
 # ES6
 
+## class 单例模式
+
+```js
+class A {
+  constructor(param) {
+    if (A.instance) {
+      return A.instance
+    }
+    this.param = param
+    A.instance = this
+  }
+}
+
+const a = new A('a')
+const b = new A('b')
+
+console.log(a === b) // true
+```
+
+在上述代码中，`A` 类的构造函数检查是否已经存在一个实例。如果不存在，它将当前实例设置为 `A.instance`，然后返回该实例。这确保了无论多少次尝试实例化 `A` 类，都只会返回同一个实例。
+
+这种实现方式利用了 JavaScript 的类的构造函数只会在第一次实例化时被调用的特性，从而保证只有一个实例被创建。
+
+
+
 ## 可选链操作符
 
 可选链操作符 `?.` 允许读取位于连接对象链深处的属性值，而不必明确验证链中的每个引用是否有效。
