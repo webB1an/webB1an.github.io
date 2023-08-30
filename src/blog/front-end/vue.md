@@ -425,26 +425,21 @@ export default {
 ### el-date-picker 使用
 
 ```vue
-<el-date-picker
-  v-model="filterForm.timeRange"
-  type="daterange"
-  range-separator="至"
-  start-placeholder="开始日期"
-  end-placeholder="结束日期"
-  format="yyyy-MM-dd"
-  value-format="yyyy-MM-dd HH:mm:ss"
-  :default-time="['00:00:00', '23:59:59']"
->
-</el-date-picker>
-```
-- `format`: 此参数为页面展示格式化内容
-- `value-format`: 此参数是页面绑定的值格式化后的内容，需注意初始化时的值内容需要于 `value-format` 的值相同
-- `default-time`: 此参数为范围选择时选中日期所使用的当日内具体时刻，不使用则默认使用时刻 `00:00:00`
+<template>
+  <el-date-picker
+    v-model="filterForm.timeRange"
+    type="daterange"
+    range-separator="至"
+    start-placeholder="开始日期"
+    end-placeholder="结束日期"
+    format="yyyy-MM-dd"
+    value-format="yyyy-MM-dd HH:mm:ss"
+    :default-time="['00:00:00', '23:59:59']"
+  >
+  </el-date-picker>
+</template>
 
-
-通过 `moment` 默认使用最近 `30` 天日期
-
-```js
+<script>
 import moment from 'moment'
 export default {
   data() {
@@ -458,31 +453,68 @@ export default {
     }
   }
 }
+</script>
+```
+
+- `format`: 此参数为页面展示格式化内容
+- `value-format`: 此参数是页面绑定的值格式化后的内容，需注意初始化时的值内容需要于 `value-format` 的值相同
+- `default-time`: 此参数为范围选择时选中日期所使用的当日内具体时刻，不使用则默认使用时刻 `00:00:00`
+- 通过 `moment` 默认使用最近 `30` 天日期
+
+当 `el-date-picker` 的类型设置成 `date` 时，可以设置如 `value-format="yyyy-MM-dd 00:00:00"` 设置默认的时间：
+
+```vue
+<template>
+  <el-date-picker 
+    v-model="filterForm.start" 
+    clearable 
+    size="mini" 
+    type="date" 
+    placeholder="请选择结束日期" 
+    value-format="yyyy-MM-dd 23:59:59"
+  >
+  </el-date-picker>
+</template>
+
+<script>
+import moment from 'moment'
+export default {
+  data() {
+    return {
+      filterForm: {
+        start: moment().subtract(30, 'days').startOf('day').format('YYYY-MM-DD HH:mm:ss')
+      } 
+    }
+  }
+}
+</script>
 ```
 
 ### el-table 表格实现跨页选择数据
 
 ```vue
-<el-table
-  ref="multipleTable"
-  :data="tableData"
-  border
-  row-key="id"
-  @selection-change="handleSeleChange"
->
-  <el-table-column
-    align="center"
-    :reserve-selection="true"
-    type="selection"
-    width="55"
+<template>
+  <el-table
+    ref="multipleTable"
+    :data="tableData"
+    border
+    row-key="id"
+    @selection-change="handleSelectChange"
   >
-  </el-table-column>
-</el-table>
+    <el-table-column
+      align="center"
+      :reserve-selection="true"
+      type="selection"
+      width="55"
+    >
+    </el-table-column>
+  </el-table>
+</template>
 
 <script>
 export default {
   methods: {
-    handleSeleChange(val) {
+    handleSelectChange(val) {
       this.selected = val
     }
   }
@@ -490,4 +522,4 @@ export default {
 </script>
 ```
 
-上面代码可以看到，要实现 el-table 表格实现跨页选择数据，需要指定 `el-table-column` 的 `type="selection"` 并且需要设置 `:reserve-selection="true"`，同时指定 `el-table` 的 `row-key="id"`，并绑定 `@selection-change="handleSeleChange"` 方法后就可以实现跨页选择数据了。
+上面代码可以看到，要实现 el-table 表格实现跨页选择数据，需要指定 `el-table-column` 的 `type="selection"` 并且需要设置 `:reserve-selection="true"`，同时指定 `el-table` 的 `row-key="id"`，并绑定 `@selection-change="handleSelectChange"` 方法后就可以实现跨页选择数据了。
