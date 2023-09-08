@@ -1,5 +1,9 @@
 # VUE3
 
+## Vue3+Vite+Ts 项目搭建
+
+[查看文章](/blog/article/2023/10.html)
+
 ## vue3 自定义全局 directive 功能
 
 [查看文章](/blog/article/2023/3.html)
