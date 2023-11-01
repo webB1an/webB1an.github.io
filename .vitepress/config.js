@@ -114,6 +114,7 @@ const sidebar = {
     {
       text: '前端相关',
       items: [
+        { text: 'algorithm', link: '/blog/front-end/algorithm' },
         { text: 'javascript', link: '/blog/front-end/javascript' },
         { text: 'css', link: '/blog/front-end/css' },
         { text: 'es6', link: '/blog/front-end/es6' },

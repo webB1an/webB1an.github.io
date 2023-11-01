@@ -10,6 +10,179 @@
 }
 </style>
 
+<script setup>
+import DialogResetFields from './components/vue/DialogResetFields.vue'
+import DialogResetFieldsRepair from './components/vue/DialogResetFieldsRepair.vue'
+</script>
+
+## Element Dialog 组件中使用 form 表单数据 resetFields 问题
+
+在 Element 的 Dialog 组件中使用 form，form 初始值为空，在打开 Dialog 时给表单赋值，关闭 Dialog 时使用 `this.$refs.form.resetFields()` 清空表单数据，但是重新打开 Dialog 发现表单数据并没有清空。 情况如下（**先点击修改，关闭弹窗后，点击新增**）：
+
+<DialogResetFields />
+
+::: details 代码
+```vue
+<template>
+  <el-button type="primary" @click="handleAdd">新增</el-button>
+  <el-button type="primary" @click="handleOpenDialog">修改</el-button>
+  <el-dialog title="弹窗" v-model="dialogFormVisible" width="500" @close="handleCloseDialog">
+    <el-form ref="form" :model="form" :rules="rules">
+      <el-form-item label="名称" prop="name">
+        <el-input v-model="form.name" />
+      </el-form-item>
+      <el-form-item label="类型" prop="type">
+        <el-input v-model="form.type" />
+      </el-form-item>
+    </el-form>
+    <template v-slot:footer>
+      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="handleConfirmDialog">确 定</el-button>
+    </template>
+  </el-dialog>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      dialogFormVisible: false,
+      form: {
+        name: '',
+        type: '',
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+        ],
+        type: [
+          { required: true, message: '请选择活动区域', trigger: 'change' }
+        ]
+      }
+    }
+  },
+  methods: {
+    handleAdd() {
+      this.dialogFormVisible = true;
+    },
+    handleOpenDialog() {
+      this.dialogFormVisible = true;
+      this.form = {
+        ...this.form,
+        name: '活动名称',
+        type: '活动区域',
+      }
+    },
+    handleCloseDialog() {
+      this.$refs['form'].resetFields();
+    },
+    handleConfirmDialog() {
+      this.$refs['form'].validate((valid) => {
+        if (valid) {
+          this.dialogFormVisible = false;
+          this.$message({
+            type: 'success',
+            message: '操作成功!'
+          });
+        } else {
+          return false;
+        }
+      });
+    }
+  }
+}
+</script>
+```
+:::
+
+上面例子可以看到，点击打开 Dialog 后，表单数据被赋值，关闭 Dialog 后，表单数据被清空，但是再次打开 Dialog 后，表单数据并没有被清空。
+
+这是因为 form 的 `resetFields` 方法是**重置**表单的初始化数据，而不是清空表单的数据，form 表单的数据在 form 表单生命周期的挂载阶段前初始化后使用 `resetFields` 方法重置表单数据成初始化数据。
+
+上面例子中调用 `handleOpenDialog` 方法后就对 form 进行赋值操作，这时候 form 表单还未挂载完成，所以赋值后的 form 表单数据会被当成 form 的初始化数据，所以在 Dialog 中使用 `resetFields` 方法后，form 表单数据并没有被清空。
+
+这是只需要在赋值时使用 `this.$nextTick` 方法，将赋值操作放在 form 表单挂载完成后执行，这样就可以解决上面的问题。
+
+<DialogResetFieldsRepair />
+
+::: details 代码
+```vue
+<template>
+  <el-button type="primary" @click="handleAdd">新增</el-button>
+  <el-button type="primary" @click="handleOpenDialog">修改</el-button>
+  <el-dialog title="弹窗" v-model="dialogFormVisible" width="500" @close="handleCloseDialog">
+    <el-form ref="form" :model="form" :rules="rules">
+      <el-form-item label="名称" prop="name">
+        <el-input v-model="form.name" />
+      </el-form-item>
+      <el-form-item label="类型" prop="type">
+        <el-input v-model="form.type" />
+      </el-form-item>
+    </el-form>
+    <template v-slot:footer>
+      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="handleConfirmDialog">确 定</el-button>
+    </template>
+  </el-dialog>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      dialogFormVisible: false,
+      form: {
+        name: '',
+        type: '',
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+        ],
+        type: [
+          { required: true, message: '请选择活动区域', trigger: 'change' }
+        ]
+      }
+    }
+  },
+  methods: {
+    handleAdd() {
+      this.dialogFormVisible = true;
+    },
+    handleOpenDialog() {
+      this.dialogFormVisible = true;
+      this.$nextTick(() => {
+        this.form = {
+          ...this.form,
+          name: '活动名称',
+          type: '活动区域',
+        }
+      })
+    },
+    handleCloseDialog() {
+      this.$refs['form'].resetFields();
+    },
+    handleConfirmDialog() {
+      this.$refs['form'].validate((valid) => {
+        if (valid) {
+          this.dialogFormVisible = false;
+          this.$message({
+            type: 'success',
+            message: '操作成功!'
+          });
+        } else {
+          return false;
+        }
+      });
+    }
+  }
+}
+</script>
+```
+:::
+
+
+
 ## $router.resolve
 
 `this.$router.resolve`是Vue Router提供的一个方法，它返回一个路由解析结果对象。这个方法可以用来获取与当前路由相对应的URL路径或者跳转到另一个路由。

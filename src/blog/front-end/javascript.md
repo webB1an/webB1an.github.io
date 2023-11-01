@@ -1,5 +1,21 @@
 # JAVASCRIPT
 
+## 获取当前格式化时间
+
+```js
+function getCurrentDate() {
+  const today = new Date()
+  const year = today.getFullYear() // 获取年份
+  const month = String(today.getMonth() + 1).padStart(2, '0') // 获取月份（+1是因为月份从0开始，padStart用于补零）
+  const day = String(today.getDate()).padStart(2, '0') // 获取日期（padStart用于补零）
+
+  // 格式化成YYYY-MM-DD
+  const formattedDate = `${year}-${month}-${day}`
+
+  return formattedDate
+}
+```
+
 ## flatMap 方法用法与示例
 
 在 JavaScript 中，`flatMap` 是一个数组方法，用于对数组中的每个元素执行一个函数，并将结果组合成一个新的扁平化数组。它首先使用提供的函数映射每个元素，然后将映射后的结果按照顺序连接成一个新的数组。
@@ -860,7 +876,7 @@ console.log(result) // true
 
 ## Promise.all
 
-没次使用 `Promise.all` 都会不明确，做个记录
+每次使用 `Promise.all` 都会不明确，做个记录
 
 ```js
 const getPromiseList = async(questionId, answerId) => {
