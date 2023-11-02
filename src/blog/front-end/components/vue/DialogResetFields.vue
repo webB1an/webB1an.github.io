@@ -1,6 +1,8 @@
 <template>
-  <el-button type="primary" @click="handleAdd">新增</el-button>
-  <el-button type="primary" @click="handleOpenDialog">修改</el-button>
+  <div class="button-wrap">
+    <el-button type="primary" @click="handleAdd">新增</el-button>
+    <el-button type="primary" @click="handleOpenDialog">修改</el-button>
+  </div>
   <el-dialog title="弹窗" v-model="dialogFormVisible" width="500" @close="handleCloseDialog">
     <el-form ref="form" :model="form" :rules="rules">
       <el-form-item label="名称" prop="name">
