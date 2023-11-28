@@ -1,5 +1,6 @@
 # 历史文章汇总
 
+- [Vue3 自定义全局组件和全局指令和全局 Loading](/blog/article/2023/12)
 - [Vue3 自定义 Drawer 抽屉组件](/blog/article/2023/11)
 - [Vue3+Vite+Ts 项目搭建](/blog/article/2023/10)
 - [深入探索 JavaScript 中的 flatMap 方法：用法与示例](/blog/article/2023/9)

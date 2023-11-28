@@ -1,16 +1,12 @@
 # VUE3
 
-## Vue3+Vite+Ts 项目搭建
+## [Vue3 自定义全局组件和全局指令和全局 Loading](/blog/article/2023/12)
 
-[查看文章](/blog/article/2023/10.html)
+## [Vue3+Vite+Ts 项目搭建](/blog/article/2023/10.html)
 
-## vue3 自定义全局 directive 功能
+## [vue3 自定义全局 directive 功能](/blog/article/2023/3.html)
 
-[查看文章](/blog/article/2023/3.html)
-
-## vue3 自定义全局 loading 功能
-
-[查看文章](/blog/article/2023/2.html)
+## [vue3 自定义全局 loading 功能](/blog/article/2023/2.html)
 
 ## vue3 支持 markdown
 
