@@ -15,6 +15,8 @@ import DialogResetFields from './components/vue/DialogResetFields.vue'
 import DialogResetFieldsRepair from './components/vue/DialogResetFieldsRepair.vue'
 </script>
 
+## [Vue 数据滚动效果实现](/blog/article/2023/13)
+
 ## Element Dialog 组件中使用 form 表单数据 resetFields 问题
 
 在 Element 的 Dialog 组件中使用 form，form 初始值为空，在打开 Dialog 时给表单赋值，关闭 Dialog 时使用 `this.$refs.form.resetFields()` 清空表单数据，但是重新打开 Dialog 发现表单数据并没有清空。 情况如下（**先点击修改，关闭弹窗后，点击新增**）：

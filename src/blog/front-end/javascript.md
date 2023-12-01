@@ -1,5 +1,13 @@
 # JAVASCRIPT
 
+## 千分位格式化数字
+
+```js
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+$)/g, "$1,")
+}
+```
+
 ## 获取当前格式化时间
 
 ```js
