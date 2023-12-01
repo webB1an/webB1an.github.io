@@ -1,5 +1,40 @@
 # JAVASCRIPT
 
+## slice 和 splice 区别
+
+### `slice` 方法：
+
+- `slice` 方法用于创建一个新数组，该数组是原始数组的浅拷贝。
+- 它接受两个参数，即切片的开始索引和结束索引（不包括结束索引的元素）。
+- 不会修改原始数组，而是返回一个包含选定元素的新数组。
+- 如果不提供参数，`slice` 将复制整个数组。
+
+```javascript
+const originalArray = [1, 2, 3, 4, 5];
+const slicedArray = originalArray.slice(1, 4);
+console.log(slicedArray); // 输出 [2, 3, 4]
+console.log(originalArray); // 输出 [1, 2, 3, 4, 5]（原数组不变）
+```
+
+### `splice` 方法
+
+- `splice` 方法用于更改原始数组，可以删除、替换或添加新元素。
+- 它接受至少两个参数，第一个参数是开始操作的索引，第二个参数是删除的元素数量。
+- 除了删除元素外，`splice` 还可以接受额外的参数，用于在指定位置插入新元素。
+
+```javascript
+const originalArray = [1, 2, 3, 4, 5];
+const removedElements = originalArray.splice(1, 3, 6, 7);
+console.log(removedElements); // 输出 [2, 3, 4]（删除的元素）
+console.log(originalArray); // 输出 [1, 6, 7, 5]（原数组被修改）
+```
+
+### 总结
+
+- `slice` 创建一个新数组，不修改原数组。
+- `splice` 修改原数组，可以删除、替换或插入元素。
+
+
 ## 千分位格式化数字
 
 ```js
