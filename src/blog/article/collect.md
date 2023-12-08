@@ -1,5 +1,6 @@
 # 历史文章汇总
 
+- [JS 原型、原型链简单理解](/blog/article/2023/14)
 - [Vue 数据滚动效果实现](/blog/article/2023/13)
 - [Vue3 自定义全局组件和全局指令和全局 Loading](/blog/article/2023/12)
 - [Vue3 自定义 Drawer 抽屉组件](/blog/article/2023/11)

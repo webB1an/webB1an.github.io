@@ -1,8 +1,57 @@
 # JAVASCRIPT
 
+## 深拷贝实现
+
+```js
+function deepClone(obj) {
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+
+  if (Array.isArray(obj)) {
+    const arr = []
+    for (let i = 0; i < obj.length; i++) {
+      arr[i] = deepClone(arr[i])
+    }
+
+    return arr
+  }
+
+  const newObj = {}
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      newObj[key] = deepClone(obj[key])
+    }
+  }
+
+  return newObj
+}
+```
+
+`if (obj.hasOwnProperty(key))` 的作用是判断属性 `key` 是否是对象 `obj` 自身拥有的属性，而不是继承自原型链的属性。这是因为 `for...in` 循环会枚举对象的所有可枚举属性，包括继承自原型链的属性。
+
+在进行深拷贝时，我们通常只关心对象自身的属性，而不包括继承的属性。因此，使用 `hasOwnProperty` 来过滤掉继承的属性，确保只复制对象自身的属性。
+
+## sort 数组排序记法
+
+```js
+// 升序 从小到大
+arr.sort((a, b) => a - b)
+// 降序 从大到小
+arr.sort((a, b) => b - a)
+```
+
+在 JavaScript 的 sort 函数中，比较函数的返回值决定了元素的排列顺序。比较函数入参为 `(a, b)` 时：
+
+- 如果比较函数返回负数，a 就会在 b 之前。
+- 如果比较函数返回零，a 和 b 的相对位置保持不变。
+- 如果比较函数返回正数，b 就会在 a 之前。
+
+所以就 `arr.sort((a, b) => a - b)` 而言如果 a 小于 b，那么 a - b 会得到一个负数，所以 a 将排在 b 之前，这样就实现了从小到大的升序排序。因为比较函数是 a - b，所以返回的是元素之间的差值，这决定了它们的排列顺序。
+
 ## slice 和 splice 区别
 
-### `slice` 方法：
+### `slice` 方法
 
 - `slice` 方法用于创建一个新数组，该数组是原始数组的浅拷贝。
 - 它接受两个参数，即切片的开始索引和结束索引（不包括结束索引的元素）。
@@ -33,6 +82,38 @@ console.log(originalArray); // 输出 [1, 6, 7, 5]（原数组被修改）
 
 - `slice` 创建一个新数组，不修改原数组。
 - `splice` 修改原数组，可以删除、替换或插入元素。
+
+
+## substring 和 substr 方法差异
+
+`substring` 和 `substr` 是 JavaScript 字符串对象的两个方法，它们用于从字符串中提取子字符串。虽然它们的功能类似，但有一些关键的区别：
+
+### 参数的不同
+
+- `substring(startIndex, endIndex)`：接受两个参数，分别是开始索引和结束索引（不包括结束索引处的字符）。如果省略结束索引，则子字符串包括原始字符串中开始索引到字符串末尾的所有字符。
+- `substr(startIndex, length)`：接受两个参数，分别是开始索引和要提取的字符个数。如果省略第二个参数，则子字符串包括开始索引到字符串末尾的所有字符。
+
+### 对负数参数的处理
+
+- `substring` 不接受负数参数。如果传入的参数为负数，它会被当作0处理。
+- `substr` 允许使用负数的第一个参数，表示从字符串末尾开始的位置。例如，`substr(-2)` 表示从倒数第二个字符开始提取。
+
+```javascript
+const str = "Hello, World!";
+
+// 使用 substring
+console.log(str.substring(7, 12)); // 输出 "World"
+console.log(str.substring(7));      // 输出 "World!"
+
+// 使用 substr
+console.log(str.substr(7, 5));      // 输出 "World"
+console.log(str.substr(7));         // 输出 "World!"
+
+// 负数参数
+console.log(str.substr(-6));        // 输出 "World!"
+```
+
+总的来说，`substring` 更灵活，因为它接受两个索引参数，而 `substr` 则通过一个起始索引和一个长度参数来指定子字符串。选择使用哪个方法通常取决于具体的需求。
 
 
 ## 千分位格式化数字
@@ -235,6 +316,8 @@ export function Export(res, filename, type = 'xlsx') {
 ```
 
 ## js 构造函数 原型 实例 原型链 继承
+
+### [JS 原型、原型链简单理解](/blog/article/2023/14)
 
 ### Constructor 构造函数
 
