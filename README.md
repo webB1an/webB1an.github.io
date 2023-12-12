@@ -12,3 +12,15 @@ git tag -a v2.0 -m "博客最新版本"
 # 推送所有tag
 git push origin --tags
 ```
+
+## 运行
+
+```bash
+pnpm run dev
+```
+
+## 打包
+
+```bash
+pnpm run build
+```
