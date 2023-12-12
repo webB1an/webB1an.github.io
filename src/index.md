@@ -33,15 +33,16 @@ async function getSentence() {
     <img src="/images/blog.gif" />
   </p>
   <p class="description">
-    <div class="loading" v-if="!sentence">
+    <template v-if="sentence">
+      {{ sentence }}
+    </template>
+    <div class="loading" v-else>
       <div class="shape shape-1"></div>
       <div class="shape shape-2"></div>
       <div class="shape shape-3"></div>
       <div class="shape shape-4"></div>
     </div>
-    <template v-else>
-      {{ sentence }}
-    </template>
+    
   </p>
   <p class="actions">
     <a class="get-started" href="/blog/tools/useful-website">
