@@ -248,7 +248,7 @@ html:not(.dark) .accent,
   position: relative;
   width: 30px;
   height: 30px;
-  margin: 0 auto;
+  margin: 24px auto 40px;
 }
 
 .shape {
