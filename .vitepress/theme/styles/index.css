@@ -6,7 +6,7 @@ html {
 
 body {
   margin: 0
-}
+} 
 
 main {
   display: block
@@ -199,6 +199,7 @@ template {
   --vt-c-green-lighter: #35eb9a;
   --vt-c-green-dark: #33a06f;
   --vt-c-green-darker: #155f3e;
+  --vp-c-green-dark: #33a06f;
   --vt-c-blue: #3b8eed;
   --vt-c-blue-light: #549ced;
   --vt-c-blue-lighter: #50a2ff;
@@ -241,7 +242,9 @@ template {
   --vt-c-brand: var(--vt-c-green);
   --vt-c-brand-light: var(--vt-c-green-light);
   --vt-c-brand-dark: var(--vt-c-green-dark);
-  --vt-c-brand-highlight: var(--vt-c-brand-dark)
+  --vt-c-brand-highlight: var(--vt-c-brand-dark);
+  --vp-c-brand: var(--vt-c-green);
+  --vp-c-brand-1: var(--vt-c-green);
 }
 
 .dark {
@@ -282,6 +285,10 @@ template {
   --vt-nav-height: 55px
 }
 
+.vp-doc a:hover {
+  color: var(--vp-c-green-dark) !important;
+}
+
 
 .VPHome {
   padding-bottom: 0 !important;
@@ -300,7 +307,10 @@ template {
 .VPNavBar .container{
   height: 100%;
 }
-.VPNavBar .container .VPNavBarTitle .title {
+.VPNavBar .container .title {
+  height: 100%;
+}
+.VPNavBar .container .title .VPNavBarTitle {
   height: 100%;
 }
 
@@ -331,4 +341,28 @@ html.dark .VPNavBar {
 }
 pre, code, kbd, samp {
   font-family: var(--vt-font-family-mono);
+}
+
+.content-body {
+  height: 100% !important;
+}
+
+.curtain {
+  display: none !important;
+}
+
+.VPSidebarItem {
+  padding-bottom: 0 !important;
+}
+
+@media (min-width: 960px) {
+  .VPNavBarTitle.has-sidebar .title {
+    border-bottom: unset !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .VPNavBar.has-sidebar .title {
+    height: 100% !important;
+  }
 }

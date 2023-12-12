@@ -1,3 +1,5 @@
+import { defineConfig } from 'vitepress'
+
 const nav = [
   {
     text: 'About',
@@ -147,7 +149,8 @@ const sidebar = {
   ]
 }
 
-export default {
+// https://vitepress.dev/reference/site-config
+export default defineConfig({
   title: 'WuT1ao',
   description: 'Wu T1ao - Personal Blog',
   srcDir: 'src',
@@ -157,20 +160,19 @@ export default {
     ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
   themeConfig: {
+    // https://vitepress.dev/reference/default-theme-config
     logo: '/images/blog.gif',
     siteTitle: 'WuT1ao',
     nav,
     sidebar,
+    search: {
+      provider: 'local'
+    },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/webB1an' },
     ],
     outline: [2, 6],
     outlineTitle: '本页目录',
-    // editLink: {
-    //   repo: 'webB1an/webB1an.github.io',
-    //   text: 'Edit this page on GitHub'
-    // },
-
     editLink: {
       pattern: 'https://github.com/webB1an/webB1an.github.io/edit/master/src/:path',
       text: '编辑此页面'
@@ -184,12 +186,7 @@ export default {
     },
 
     footer: {
-      license: {
-        text: 'MIT License',
-        link: 'https://opensource.org/licenses/MIT'
-      },
       copyright: `Copyright © 2022-${new Date().getFullYear()} Wu T1ao`
-    },
-    
+    }
   }
-}
+})

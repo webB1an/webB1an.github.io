@@ -1,18 +1,31 @@
 {
-  "name": "w-blog",
+  "type": "module",
+  "name": "wut1ao-blog",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vitepress",
-    "build": "vitepress build",
-    "serve": "vitepress serve"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vitepress dev .",
+    "build": "vitepress build .",
+    "docs:preview": "vitepress preview ."
   },
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "search-insights"
+      ]
+    }
+  },
   "devDependencies": {
-    "@types/prismjs": "^1.26.0",
-    "sass": "^1.63.6",
-    "vitepress": "^1.0.0-alpha.29",
-    "vue": "^3.2.45"
+    "@types/prismjs": "^1.26.3",
+    "sass": "^1.69.5",
+    "vitepress": "1.0.0-rc.31",
+    "vue": "^3.3.11"
   },
   "dependencies": {
     "element-plus": "^2.3.7",
