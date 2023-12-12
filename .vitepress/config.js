@@ -161,9 +161,6 @@ export default {
     siteTitle: 'WuT1ao',
     nav,
     sidebar,
-    search: {
-      provider: 'local',
-    },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/webB1an' },
     ],

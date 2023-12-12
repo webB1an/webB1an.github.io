@@ -1,5 +1,105 @@
 # JS 面试问题
 
+## `apply`、`call`、`bind` 之前的区别
+
+### 作用
+
+`apply`、`call`、`bind` 的作用是改变函数执行时的上下文，简单来说就是改变函数运行时 `this` 的指向，以下面的例子为例：
+
+```js
+let name = 'luck'
+let obj = {
+  name: 'lucy',
+  say: function() {
+    console.log(this.name)
+  }
+}
+obj.say() // lucy
+setTimeout(obj.say, 0) // luck
+```
+
+上面的结果可以看到，正常情况下 `say` 函数是输出的 `lucy`，但是当使用 `setTimeout` 的时候，输出的是 `luck`，这是因为 `setTimeout` 的执行环境是全局环境，所以 `this` 指向的是全局对象 `window`，所以输出的是 `luck`。
+
+如果想要 `this` 指向正常的 `obj`，我们只需要：
+
+```js
+setTimeout(obj.say.bind(obj), 0) // lucy
+```
+
+### 区别
+
+#### apply
+
+`apply` 接收两个参数，第一个参数是函数运行的作用域，第二个参数是一个参数数组。
+
+改变 `this` 指向后原函数会立即执行，且此方法只是临时改变 `this` 指向一次。
+
+```js
+function fn(...arg) {
+  console.log(this, arg)
+}
+
+let obj = {
+  name: 'lucy'
+}
+
+fn.apply(obj, [1, 2, 3]) // {name: "lucy"} [1, 2, 3] 这时的 this 是指向 obj 的
+fn.apply(null, [1, 2, 3]) // 这时的 this 指向 Window
+fn.apply(undefined, [1, 2, 3]) // 这时的 this 指向 Window
+```
+
+#### call
+
+`call` 方法其实和 `apply` 类似，只是传参的方式不同，`call` 方法接收的是一个参数列表，而 `apply` 接收的是一个参数数组。
+
+和 `apply` 一样，改变 `this` 指向后原函数会立即执行，且此方法只是临时改变 `this` 指向一次。
+
+```js
+function fn(...arg) {
+  console.log(this, arg)
+}
+
+let obj = {
+  name: 'lucy'
+}
+
+fn.call(obj, 1, 2, 3) // {name: "lucy"} [1, 2, 3] 这时的 this 是指向 obj 的
+fn.call(null, 1, 2, 3) // 这时的 this 指向 Window
+fn.call(undefined, 1, 2, 3) // 这时的 this 指向 Window
+```
+
+#### bind
+
+`bind` 方法和 `call` 方法类似，第一个参数也是 `this` 指向，后面传入的也是参数列表（这个参数列表可以分多次传入）。
+
+`bind` 改变 `this` 指向后不会立即执行，而是返回一个永久改变了 `this` 指向的函数，需要手动执行。
+
+
+```js
+function fn(...arg) {
+  console.log(this, arg)
+}
+
+let obj = {
+  name: 'lucy'
+}
+
+const objFn = fn.bind(obj)
+
+objFn(1, 2, 3) // {name: "lucy"} [1, 2, 3] 这时的 this 是指向 obj 的
+// 或者
+fn.bind(obj, 1, 2, 3)()
+// 或者
+fn.bind(obj)(1, 2, 3)
+```
+
+### 总结
+
+- `apply`、`call`、`bind` 都是用来改变函数的 `this` 对象的指向的
+- `apply`、`call`、`bind`  三者第一个参数都是 `this` 要指向的对象，也就是想指定的上下文，如果没有参数或者参数为 `null`、`undefined`，则默认指向全局 window
+- `apply`、`call`、`bind`  三者都可以利用后续参数传参，`apply` 接收数组，`call` 接收参数列表，`bind` 接收参数列表，且 `apply` 和 `call` 是一次性传入参数，而 `bind` 可以分为多次传入
+- `bind` 是返回绑定 `this` 之后的函数，便于稍后调用；`apply`、`call` 则是立即调用
+
 ## new 操作符干了什么？
 
 首先要知道 new 操作符是用来创建一个给定构造函数的实例对象。如下：
