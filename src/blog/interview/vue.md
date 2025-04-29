@@ -10,6 +10,115 @@
 }
 </style>
 
+Vue 2 和 Vue 3 的响应式系统虽然功能类似，但**实现原理完全不同**，Vue 3 是对 Vue 2 响应式系统的一次**全面升级**，更灵活也更高效。
+
+---
+
+## 🎯 1. Vue 2 的响应式原理
+
+### ✅ **基于 `Object.defineProperty()`**
+
+Vue 2 在初始化时会对 `data` 对象中的每个属性使用 `Object.defineProperty()` 进行“劫持”（数据拦截）：
+
+```js
+Object.defineProperty(obj, 'key', {
+  get() { /* 收集依赖 */ },
+  set(newVal) { /* 通知更新 */ }
+});
+```
+
+### 👀 核心步骤：
+
+1. **初始化阶段**：
+   - 遍历所有的 data 属性
+   - 使用 `Object.defineProperty` 把每个属性变成“响应式的”
+
+2. **依赖收集（Dep + Watcher）**：
+   - 页面渲染会读取数据的 `getter`，触发依赖收集；
+   - 数据变化时触发 `setter`，通知相关 `Watcher` 重新渲染视图。
+
+3. **数组响应式的 hack（重写原型方法）**：
+   - Vue 2 不能监听数组元素的索引或 length 变化；
+   - 通过重写 `push` / `pop` / `splice` 等方法来劫持数组的变化。
+
+### ⚠️ 缺点：
+
+- **只能对已存在的属性做响应式**：新增属性要用 `$set`，否则不会响应。
+- **不能监听数组索引变化和 length 变化**。
+- **深层嵌套对象需要递归遍历，性能开销大**。
+- **静态编译不友好**（难以 Tree-shaking）。
+
+---
+
+## 🎯 2. Vue 3 的响应式原理
+
+### ✅ **基于 ES6 的 `Proxy`**
+
+Vue 3 使用 `Proxy` 替代了 `Object.defineProperty`，直接“包裹”整个对象，从而统一拦截访问和修改行为：
+
+```js
+const proxy = new Proxy(obj, {
+  get(target, key, receiver) {
+    // 依赖收集
+    return Reflect.get(target, key, receiver);
+  },
+  set(target, key, value, receiver) {
+    // 派发更新
+    return Reflect.set(target, key, value, receiver);
+  }
+});
+```
+
+### 🧠 关键特性：
+
+- **懒加载响应式（懒代理）**：只有在访问某个对象时才递归进行响应式转换，提高性能。
+- **支持对象新增/删除属性的自动响应**。
+- **支持数组索引、length 等操作**。
+- **支持 `Map`、`Set`、`WeakMap`、`WeakSet` 等复杂数据结构的响应式处理**。
+- **使用 `Reflect` 保留原始行为，提高兼容性和一致性。**
+
+---
+
+## 🔍 对比：Vue 2 vs Vue 3 响应式系统
+
+| 对比项              | Vue 2 (`defineProperty`)        | Vue 3 (`Proxy`)                     |
+|---------------------|----------------------------------|-------------------------------------|
+| API 支持            | 只能监听已有属性                | 任意属性变更都能响应               |
+| 数组响应            | hack 原型方法，不支持索引响应  | 原生支持索引和 `length` 监听       |
+| 数据深度监听        | 初始化时递归                    | 访问时惰性代理（性能更高）        |
+| 新增/删除属性响应   | 需要 `$set` / `$delete`         | 自动响应                           |
+| 支持 Map/Set 等     | 不支持                          | 支持                               |
+| 响应式转化控制      | 不可关闭                        | 使用 `markRaw`、`shallowReactive` 等灵活控制 |
+| 性能                | 中等，深层嵌套时递归多          | 更快更轻，懒代理提升性能           |
+| 是否兼容 IE11       | ✅（兼容）                      | ❌（Proxy 不支持 IE）              |
+
+---
+
+## 🧪 举个例子
+
+### Vue 2（新增属性不响应）
+
+```js
+vm.obj.a = 1;
+// 视图不会更新，必须这样写：
+Vue.set(vm.obj, 'a', 1);
+```
+
+### Vue 3（直接新增即可响应）
+
+```js
+reactiveObj.a = 1; // 响应式自动处理，视图更新
+```
+
+---
+
+## 🧠 总结一句话
+
+- **Vue 2：defineProperty，一次性递归转换，性能弱，不支持动态属性**
+- **Vue 3：Proxy，懒加载转换，灵活高效，支持更复杂数据结构**
+
+---
+
 ## 对 Keep-alive 的理解
 
 - keep-alive 是 Vue 内置的一个组件，能在切换组件过程中将状态保留在内存中，防止重复渲染 DOM

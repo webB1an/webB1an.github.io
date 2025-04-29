@@ -5,6 +5,7 @@
 - [TypeScript 教程](https://wangdoc.com/typescript/)：TypeScript 开源教程，介绍基本概念和用法，面向初学者。
 
 ## 学习
+- [CSS 奇技淫巧](https://github.com/chokcoco/iCSS)：CSS 奇技淫巧，包含了各种 CSS 技巧。
 - [前端面试](https://vue3js.cn/interview/)：前端面试题，包含了各种前端面试题。
 - [程序员副业指南](http://r.ftqq.com/lean-side-bussiness/index.html)：一个程序员副业指南，包含了程序员副业的各种思路和方法。
 - [考公](https://www.zhihu.com/people/lao-fu-zi-40-46)：一个关于公务员考试的知乎专栏，包含了公务员考试的各种信息。

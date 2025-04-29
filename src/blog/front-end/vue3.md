@@ -1,5 +1,68 @@
 # VUE3
 
+## vue3.5+ 语法改变
+
+### ref
+
+:::details 3.5 前的用法
+在 3.5 之前的版本尚未引入 useTemplateRef()，我们需要声明一个与模板里 ref attribute 匹配的引用：
+```js
+<script setup>
+import { ref, onMounted } from 'vue'
+
+// 声明一个 ref 来存放该元素的引用
+// 必须和模板里的 ref 同名
+const input = ref(null)
+
+onMounted(() => {
+  input.value.focus()
+})
+</script>
+
+<template>
+  <input ref="input" />
+</template>
+```
+:::
+
+要在组合式 API 中获取引用 `useTemplateRef`
+
+```js
+<script setup>
+import { useTemplateRef, onMounted } from 'vue'
+
+// 第一个参数必须与模板中的 ref 值匹配
+const input = useTemplateRef('my-input')
+
+onMounted(() => {
+  input.value.focus()
+})
+</script>
+
+<template>
+  <input ref="my-input" />
+</template>
+```
+
+
+## antfu eslint-config 配置
+
+```js
+// eslint.config.js
+import antfu from '@antfu/eslint-config';
+
+export default await antfu(
+  {
+    rules: {
+      'comma-dangle': [2, 'never'],
+      'style/comma-dangle': [2, 'never'],
+      'semi': [2, 'always'],
+      'style/semi': [2, 'always']
+    }
+  }
+);
+```
+
 ## [Vue3 自定义全局组件和全局指令和全局 Loading](/blog/article/2023/12)
 
 ## [Vue3+Vite+Ts 项目搭建](/blog/article/2023/10.html)

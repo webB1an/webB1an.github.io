@@ -133,15 +133,18 @@ const sidebar = {
     {
       text: '面试相关',
       items: [
+        { text: 'css', link: '/blog/interview/css' },
         { text: 'javascript', link: '/blog/interview/javascript' },
         { text: 'vue', link: '/blog/interview/vue' },
         { text: 'optimize', link: '/blog/interview/optimize' },
+        { text: 'other', link: '/blog/interview/other' },
       ]
     },
     {
       text: '文章',
       items: [
         { text: '历史文章汇总', link: '/blog/article/collect' },
+        { text: '2025 年文章汇总', link: '/blog/article/2025' },
         { text: '2023 年文章汇总', link: '/blog/article/2023' },
         { text: '2022 年文章汇总', link: '/blog/article/2022' },
       ]

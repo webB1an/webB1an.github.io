@@ -1,5 +1,220 @@
 # JAVASCRIPT
 
+## JavaScript 设计模式
+
+JavaScript 中常用的设计模式（Design Patterns）可以帮助写出更清晰、可维护、可扩展的代码。
+
+### 创建型模式（Creational Patterns）
+
+用来创建对象的模式，关注“**怎么创建对象**”。
+
+#### 工厂模式（Factory）
+
+通过一个函数来根据条件创建不同类型的对象。
+
+```js
+function createUser(role) {
+  if (role === "admin") {
+    return { role: "admin", permissions: ["all"] };
+  } else {
+    return { role: "user", permissions: ["read"] };
+  }
+}
+```
+
+#### 构造函数模式（Constructor）
+
+使用 `new` 关键词创建对象。
+
+```js
+function Person(name) {
+  this.name = name;
+}
+const p = new Person("Alice");
+```
+
+#### 原型模式（Prototype）
+
+复用对象的属性或方法。
+
+```js
+const person = {
+  greet() {
+    console.log("Hi!");
+  }
+};
+const student = Object.create(person);
+student.greet(); // Hi!
+```
+
+#### 单例模式（Singleton）
+
+确保一个类只有一个实例。
+
+```js
+const Singleton = (function () {
+  let instance;
+  function createInstance() {
+    return { name: "I am the only one" };
+  }
+  return {
+    getInstance() {
+      if (!instance) {
+        instance = createInstance();
+      }
+      return instance;
+    }
+  };
+})();
+```
+
+### 结构型模式（Structural Patterns）
+
+关注“**如何组合对象和类**”。
+
+#### 装饰器模式（Decorator）
+
+动态添加功能，而不改变原对象。
+
+```js
+function car() {
+  return { drive() { console.log("Driving"); } };
+}
+
+function withTurbo(car) {
+  car.turbo = true;
+  const baseDrive = car.drive;
+  car.drive = function () {
+    baseDrive();
+    console.log("With turbo!");
+  };
+  return car;
+}
+
+const myCar = withTurbo(car());
+myCar.drive(); // Driving \n With turbo!
+```
+
+#### 适配器模式（Adapter）
+
+把一个接口转成另一个适配目标接口。
+
+```js
+function oldAPI() {
+  return "old";
+}
+
+function adapter() {
+  const result = oldAPI();
+  return { value: result };
+}
+```
+
+#### 代理模式（Proxy）
+
+通过代理控制对象访问。
+
+```js
+const user = {
+  name: "Tom",
+  age: 25
+};
+
+const proxyUser = new Proxy(user, {
+  get(target, key) {
+    console.log("访问了属性：" + key);
+    return target[key];
+  }
+});
+```
+
+### 行为型模式（Behavioral Patterns）
+
+关注“**对象之间的通信、职责分配**”。
+
+#### 观察者模式（Observer）
+
+一个对象状态改变，自动通知所有订阅者。
+
+```js
+class Observable {
+  constructor() {
+    this.subs = [];
+  }
+  subscribe(fn) {
+    this.subs.push(fn);
+  }
+  notify(data) {
+    this.subs.forEach(fn => fn(data));
+  }
+}
+
+const ob = new Observable();
+ob.subscribe(data => console.log("接收到：", data));
+ob.notify("Hello");
+```
+
+#### 策略模式（Strategy）
+
+定义一组算法，使它们可以互换使用。
+
+```js
+const strategies = {
+  add(a, b) { return a + b; },
+  sub(a, b) { return a - b; }
+};
+
+function calc(type, a, b) {
+  return strategies[type](a, b);
+}
+```
+
+#### 命令模式（Command）
+
+将操作封装成命令对象。
+
+```js
+function Command(execute) {
+  this.execute = execute;
+}
+
+const turnOn = new Command(() => console.log("Light on"));
+turnOn.execute();
+```
+
+#### 中介者模式（Mediator）
+
+通过一个中介统一协调多个对象之间的通信。
+
+```js
+class ChatRoom {
+  static showMessage(user, message) {
+    console.log(`${user.name}：${message}`);
+  }
+}
+
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+  send(message) {
+    ChatRoom.showMessage(this, message);
+  }
+}
+
+const u = new User("张三");
+u.send("你好！");
+```
+
+
+### 总结
+
+类型 | 模式
+创建型 | 工厂、构造函数、单例、原型、抽象工厂
+结构型 | 装饰器、适配器、代理、桥接、组合
+行为型 | 观察者、策略、命令、中介者、状态
+
+
 ## 深拷贝实现
 
 ```js
